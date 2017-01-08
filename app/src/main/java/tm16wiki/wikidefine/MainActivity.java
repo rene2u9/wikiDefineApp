@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
 
 
-                if(https.loadURL("https://de.wikipedia.org/wiki/Spezial:Exportieren/"+ searchtext.getText())){
+                if(https.loadURL("https://en.wikipedia.org/wiki/Special:Export/"+ searchtext.getText())){
                     String content = xml.getTagValue(https.getContent(), "text");
                     String definition = text.getDefinition(content);
                     if(definition.length() < 30){
