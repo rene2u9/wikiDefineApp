@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!--
+Im adding Data Binding to the layout,We can effectively use ide to generate methods and better react
+to changes with lesss code
+
+Make Sure you have dataBinding.enabled=true in app build.gradle file
+-->
+
+<layout>
+
+    <data>
+        <variable
+            name="mainActivityHandler"
+            type="tm16wiki.wikidefine.MainActivity.MainActivityHandler"/>
+        <variable
+            name="WikiProxy"
+            type="tm16wiki.wikidefine.WikiProxy"/>
+    </data>
+
+    <!-- Added a bind namespace for included layouts -->
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,10 +35,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:onClick="@{(view) -> mainActivityHandler.query(view)}"
         app:srcCompat="@android:drawable/ic_menu_search"
         app:backgroundTint="?android:attr/textColorLink" />
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_main"
+        android:id="@+id/contentMainLayout"
+        bind:mainActivityHandler='@{mainActivityHandler}'
+        bind:WikiProxy="@{WikiProxy}"/>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -26,3 +52,4 @@
     </android.support.design.widget.AppBarLayout>
 
 </android.support.design.widget.CoordinatorLayout>
+</layout>
