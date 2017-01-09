@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="Lade">Loading</string>
-    <string name="action_settings">Settings</string>
+    <string name="setLang_en">english</string>
+    <string name="setLang_de">deutsch</string>
+    <string name="setLang_fr">français</string>
+    <string name="setLang_es">español</string>
+    <string name="setLang_ru">pусский</string>
+    <string name="setLang_it">italiano</string>
+    <string name="setLang_pl">polski</string>
+    <string name="setLang_pt">português</string>
+    <string name="setLang_zh">中文</string>
+    <string name="setLang_ja">日本語</string>
     <string name="not_found">Nichts Gefunden</string>
     <string name="insert_query">Insert Query</string>
     <string name="app_name">WikiDefine</string>

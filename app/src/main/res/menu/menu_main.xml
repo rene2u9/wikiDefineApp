@@ -2,9 +2,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tm16wiki.wikidefine.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/setLang_en"
+        android:title="@string/setLang_en" />
+    <item
+        android:id="@+id/setLang_de"
+        android:title="@string/setLang_de" />
+    <item
+        android:id="@+id/setLang_fr"
+        android:title="@string/setLang_fr" />
+    <item
+        android:id="@+id/setLang_es"
+        android:title="@string/setLang_es" />
+    <item
+        android:id="@+id/setLang_ru"
+        android:title="@string/setLang_ru" />
+    <item
+        android:id="@+id/setLang_it"
+        android:title="@string/setLang_it" />
+    <item
+        android:id="@+id/setLang_pl"
+        android:title="@string/setLang_pl" />
+    <item
+        android:id="@+id/setLang_pt"
+        android:title="@string/setLang_pt" />
+    <item
+        android:id="@+id/setLang_zh"
+        android:title="@string/setLang_zh" />
+    <item
+        android:id="@+id/setLang_ja"
+        android:title="@string/setLang_ja" />
+
 </menu>
