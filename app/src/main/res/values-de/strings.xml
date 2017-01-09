@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WikiDefine</string>
+    <string name="action_settings">Settings</string>
+    <string name="search">Suche</string>
+    <string name="Lade">Lade</string>
+    <string name="not_found">nichts gefunden ¯\\_(ツ)_/¯</string>
+    <string name="insert_query">Add German Translation</string>
+</resources>

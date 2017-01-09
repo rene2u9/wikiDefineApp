@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+<!--
+    @author: Harry K
+
+    Some part of me dislikes Relative layouts but yeah, sure
+-->
+
+<layout>
+
+    <data>
+        <variable
+            name="mainActivityHandler"
+            type="tm16wiki.wikidefine.MainActivity.MainActivityHandler"/>
+        <variable
+            name="WikiProxy"
+            type="tm16wiki.wikidefine.WikiProxy"/>
+    </data>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,17 +37,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:layout_below="@+id/editText" />
-
+        android:text="@={WikiProxy.result}"
+        android:layout_below="@+id/queryLayout" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/queryLayout">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/editText"
-        android:hint="search"
+        android:layout_weight="2"
+        android:hint="@string/search"
+        />
+        <!--
+        removed from above
+
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        -->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/contentProgressBar"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </RelativeLayout>
+</layout>
