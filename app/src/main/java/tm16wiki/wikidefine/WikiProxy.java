@@ -5,7 +5,6 @@ import android.databinding.Bindable;
 import android.os.AsyncTask;
 import android.text.Editable;
 import android.util.Log;
-
 import tm16wiki.wikidefine.helperClasses.https;
 import tm16wiki.wikidefine.helperClasses.xml;
 import tm16wiki.wikidefine.wikiAPI.wikiTextParser;
@@ -117,6 +116,7 @@ public class WikiProxy extends BaseObservable {
         if (HttpsHelper.loadURL(URLBuilder(editable))) {
             String definition = wikiTextParser.getDefinition(XmlHelper.getTagValue(HttpsHelper.getContent(), TEXT));
             if (definition.length() < REQ_LENGTH) {
+
                 throw new NotFoundException("Not Found");
             } else {
                 return definition;
@@ -125,6 +125,28 @@ public class WikiProxy extends BaseObservable {
             throw new HttpsConnectionException("No Connection");
         }
     }
+
+
+
+
+    private String retrieveContent(String editable) throws NotFoundException, HttpsConnectionException {
+        if (HttpsHelper.loadURL("https://" + LANG + "." + URL + editable)) {
+            String definition = wikiTextParser.getDefinition(XmlHelper.getTagValue(HttpsHelper.getContent(), TEXT));
+            if (definition.length() < REQ_LENGTH) {
+
+                throw new NotFoundException("Not Found");
+            } else {
+                return definition;
+            }
+        } else {
+            throw new HttpsConnectionException("No Connection");
+        }
+    }
+
+
+
+
+
 
     /**
      * Last section of that Algorithm separated for clarity
@@ -175,27 +197,6 @@ public class WikiProxy extends BaseObservable {
         }
     }
 
-    /*
-    this was the original method, decomposed within this class
-
-    public void do_it(){
-        if(https.loadURL(URLBuilder(searchtext.getText()))){
-            String content = xml.getTagValue(https.getContent(),TEXT);
-            String definition = text.getDefinition(content);
-            if(definition.length() < REQ_LENGTH ){
-                Snackbar.make(view, R.string.not_found, Snackbar.LENGTH_LONG).show();
-            }else {
-                while (definition.indexOf(" ")==0){
-                    definition =definition.substring(1, definition.length());
-                }
-                textview.setText(definition.replace("*", "\n*"));
-            }
-        }else{
-            Snackbar.make(view, R.string.not_found, Snackbar.LENGTH_LONG).show();
-
-        }
-    }*/
-
     /**
      * Exception Thrown when we dont Have any Connection (https.loadurl(..) returns false)
      */
@@ -205,12 +206,28 @@ public class WikiProxy extends BaseObservable {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * AsyncTask that loads the information in a simple background thread without blocking UI,
      * We Can Implement a HandlerThread if you want more Flexibility, But for now , this Works
      */
     class ContentLoader extends AsyncTask<Void, Void, String> {
-        private final Editable ed;
+        private Editable ed;
+        private String query;
         private boolean isRethrowException;
         private String exceptionMessage = null;
 
@@ -224,6 +241,10 @@ public class WikiProxy extends BaseObservable {
             isRethrowException = false;
         }
 
+        ContentLoader(String query){
+            this.query = query;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -235,14 +256,13 @@ public class WikiProxy extends BaseObservable {
         @Override
         protected String doInBackground(Void... params) {
             try {
-                return retrieveContent(ed);
+                return retrieveContent(query);
             } catch (NotFoundException | HttpsConnectionException e) {
                 exceptionMessage = e.getMessage();
                 isRethrowException = true;
             }
             return " ";
         }
-
 
         @Override
         protected void onPostExecute(String definition) {
@@ -257,8 +277,6 @@ public class WikiProxy extends BaseObservable {
             }
             setResult(SanitizeDefinition(definition));
         }
-
-
     }
 
 }
